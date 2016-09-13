@@ -5,13 +5,19 @@ var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab')),
 
 tabs.map(function(tab) {
     tab.addEventListener('click', function(e) {
-        document.getElementById(currentTab).classList.add('hidden');
-        document.getElementById(e.target.attributes.value.value).classList.remove('hidden');
+        var previousTab = document.getElementById(currentTab),
+            newTabValue = e.target.attributes.value.value,
+            activeTab = document.getElementById(newTabValue)
+
+        previousTab.classList.add('hidden');
+
+        activeTab.classList.remove('hidden');
 
         document.querySelector('.tab[value="' + currentTab + '"]').classList.remove('tab--active');
+        
         e.target.classList.add('tab--active');
 
-        currentTab = e.target.attributes.value.value;
+        currentTab = newTabValue;
     });
 });
 
